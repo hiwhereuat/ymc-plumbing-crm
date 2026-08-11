@@ -36,6 +36,7 @@ export async function POST(request: Request) {
         endTime: data.endTime,
         plumber: data.plumber,
         status: "Job Created",
+        kommoDealId: data.kommoDealId || null,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       })

@@ -12,9 +12,16 @@ type FormData = z.infer<typeof createJobSchema>;
 interface CreateJobFormProps {
   onSuccess?: () => void;
   onCancel?: () => void;
+  initialData?: {
+    leadFirstName?: string;
+    leadLastName?: string;
+    phone?: string;
+    email?: string;
+  };
+  dealId?: number;
 }
 
-export function CreateJobForm({ onSuccess, onCancel }: CreateJobFormProps) {
+export function CreateJobForm({ onSuccess, onCancel, initialData, dealId }: CreateJobFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -26,6 +33,23 @@ export function CreateJobForm({ onSuccess, onCancel }: CreateJobFormProps) {
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(createJobSchema),
+    defaultValues: {
+      leadFirstName: initialData?.leadFirstName || "",
+      leadLastName: initialData?.leadLastName || "",
+      phone: initialData?.phone || "",
+      email: initialData?.email || "",
+      jobType: undefined,
+      jobSource: undefined,
+      description: "",
+      address: "",
+      city: "",
+      zip: "",
+      area: "",
+      scheduledDate: "",
+      startTime: "",
+      endTime: "",
+      plumber: "",
+    },
   });
 
   const onSubmit = async (data: FormData) => {
@@ -34,10 +58,15 @@ export function CreateJobForm({ onSuccess, onCancel }: CreateJobFormProps) {
     setSuccessMessage(null);
 
     try {
+      const requestBody: any = { ...data };
+      if (dealId) {
+        requestBody.kommoDealId = dealId;
+      }
+
       const res = await fetch("/api/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(requestBody),
       });
 
       const json = await res.json();

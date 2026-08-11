@@ -28,6 +28,7 @@ export const createJobSchema = z.object({
   startTime: z.string().min(1, "Start time is required"),
   endTime: z.string().min(1, "End time is required"),
   plumber: z.string().min(1, "Plumber is required"),
+  kommoDealId: z.number().int().positive().optional(),
 });
 
 export const updateJobStatusSchema = z.object({
@@ -39,5 +40,5 @@ export const updateJobStatusSchema = z.object({
     "Lost / Cancelled",
   ]),
   reason: z.string().optional(),
-  sheetsRow: z.number().int().positive().optional(),
+    sheetsRow: z.number().int().positive().optional(),
 });

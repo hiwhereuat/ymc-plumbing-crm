@@ -19,6 +19,7 @@ export const jobs = sqliteTable("jobs", {
   plumber: text("plumber").notNull(),
   status: text("status").notNull().default("Job Created"),
   sheetsRow: integer("sheets_row"),
+  kommoDealId: integer("kommo_deal_id"),
   createdAt: text("created_at").notNull().default(new Date().toISOString()),
   updatedAt: text("updated_at").notNull().default(new Date().toISOString()),
 });

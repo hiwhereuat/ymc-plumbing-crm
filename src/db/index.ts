@@ -27,6 +27,7 @@ sqlite.exec(`
     plumber TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'Job Created',
     sheets_row INTEGER,
+    kommo_deal_id INTEGER,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
@@ -39,3 +40,10 @@ sqlite.exec(`
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 `);
+
+
+try {
+  sqlite.exec(`ALTER TABLE jobs ADD COLUMN kommo_deal_id INTEGER`);
+} catch (e) {
+
+}
