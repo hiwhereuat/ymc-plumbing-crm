@@ -39,4 +39,5 @@ export const updateJobStatusSchema = z.object({
     "Lost / Cancelled",
   ]),
   reason: z.string().optional(),
+  sheetsRow: z.number().int().positive().optional(),
 });

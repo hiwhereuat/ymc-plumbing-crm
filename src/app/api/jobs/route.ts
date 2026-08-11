@@ -63,7 +63,8 @@ export async function POST(request: Request) {
             jobId,
             ...data,
             status: "Job Created",
-          }),
+            callbackUrl: `${request.headers.get("origin")}/api/jobs/${jobId}`,
+            }),
         });
         db.insert(events)
           .values({

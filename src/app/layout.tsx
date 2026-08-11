@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
         <header className="bg-white shadow-sm p-4">
           <h1 className="text-xl font-bold text-blue-700">YMC Plumbing</h1>

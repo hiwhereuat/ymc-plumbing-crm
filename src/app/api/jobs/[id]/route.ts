@@ -57,17 +57,24 @@ export async function PATCH(
     try {
       const n8nUrl = process.env.N8N_WEBHOOK_URL;
       if (n8nUrl) {
+        const n8nPayload = {
+          event: "status_changed",
+          jobId,
+          previousStatus: existingJob.status,
+          newStatus: status,
+          reason,
+          leadFirstName: existingJob.leadFirstName,
+          leadLastName: existingJob.leadLastName,
+          phone: existingJob.phone,
+          jobType: existingJob.jobType,
+        };
+
         await fetch(n8nUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            event: "status_changed",
-            jobId,
-            previousStatus: existingJob.status,
-            newStatus: status,
-            reason,
-          }),
+          body: JSON.stringify(n8nPayload),
         });
+
         db.insert(events)
           .values({
             jobId,
