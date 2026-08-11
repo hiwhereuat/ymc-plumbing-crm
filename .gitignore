@@ -45,7 +45,8 @@ next-env.d.ts
 # SQLite database
 *.sqlite
 *.db
-/data/
+/data/*
+!/data/.gitkeep
 
 # n8n data
 n8n-data/
