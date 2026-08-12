@@ -39,27 +39,24 @@ export default function WidgetPage() {
   }, [loadDeals]);
 
   const handleCreateJob = async (deal: Deal) => {
-    setSelectedDeal(deal);
-    try {
-      const res = await fetch(`/api/kommo/leads/${deal.id}/contacts`);
-      const data = await res.json();
-      if (data.success && data.contacts) {
-        setInitialFormData({
-          leadFirstName: data.contacts.firstName || deal.name.split(" ")[0] || "",
-          leadLastName: data.contacts.lastName || deal.name.split(" ")[1] || "",
-          phone: data.contacts.phone || "",
-          email: data.contacts.email || "",
-        });
-      } else {
-        setInitialFormData({
-          leadFirstName: deal.name.split(" ")[0] || "",
-          leadLastName: deal.name.split(" ")[1] || "",
-          phone: "",
-          email: "",
-        });
-      }
-    } catch (error) {
-      console.error("Failed to get contacts", error);
+  setSelectedDeal(deal);
+  try {
+    const res = await fetch(`/api/kommo/leads/${deal.id}/contacts`);
+    const data = await res.json();
+    if (data.success && data.contacts) {
+      setInitialFormData({
+        leadFirstName:
+          data.contacts.firstName ||
+          deal.name.split(" ")[0] ||
+          "",
+        leadLastName:
+          data.contacts.lastName ||
+          deal.name.split(" ")[1] ||
+          "",
+        phone: data.contacts.phone || "",
+        email: data.contacts.email || "",
+      });
+    } else {
       setInitialFormData({
         leadFirstName: deal.name.split(" ")[0] || "",
         leadLastName: deal.name.split(" ")[1] || "",
@@ -67,7 +64,16 @@ export default function WidgetPage() {
         email: "",
       });
     }
-  };
+  } catch (error) {
+    console.error("Failed to get contacts", error);
+    setInitialFormData({
+      leadFirstName: deal.name.split(" ")[0] || "",
+      leadLastName: deal.name.split(" ")[1] || "",
+      phone: "",
+      email: "",
+    });
+  }
+};
 
   const handleJobCreated = async () => {
     if (selectedDeal) {

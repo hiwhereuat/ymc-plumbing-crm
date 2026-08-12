@@ -20,7 +20,8 @@ export function JobCard({ job, onStatusChange }: JobCardProps) {
   const handleAction = (newStatus: string) => {
     if (newStatus === "Lost / Cancelled") {
       const reason = prompt("Reason for cancellation:");
-      onStatusChange(job.id, newStatus, reason || undefined);
+      if (reason === null) return;
+      onStatusChange(job.id, newStatus, reason);
     } else {
       onStatusChange(job.id, newStatus);
     }

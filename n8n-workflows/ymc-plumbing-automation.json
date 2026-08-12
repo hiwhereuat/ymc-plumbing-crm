@@ -65,95 +65,39 @@
           "value": {
             "First Name": "={{$json.body.leadFirstName}}",
             "Last Name": "={{$json.body.leadLastName}}",
-            "Phone": "={{$json.body.phone}}",
+            "Phone": "={{ \"'\" + $json.body.phone }}",
+            "Email": "={{$json.body.email}}",
             "Job Type": "={{$json.body.jobType}}",
+            "Job Source": "={{$json.body.jobSource}}",
+            "Description": "={{$json.body.description}}",
             "Address": "={{$json.body.address}}",
+            "City": "={{$json.body.city}}",
+            "ZIP": "={{$json.body.zip}}",
+            "Area": "={{$json.body.area}}",
             "Scheduled Date": "={{$json.body.scheduledDate}} {{$json.body.startTime}}",
+            "Plumber": "={{$json.body.plumber}}",
+            "Status": "={{$json.body.status}}",
             "Job ID": "={{$json.body.jobId}}",
-            "Status": "={{$json.body.status}}"
+            "Reason": ""
           },
           "matchingColumns": [],
           "schema": [
-            {
-              "id": "First Name",
-              "displayName": "First Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Last Name",
-              "displayName": "Last Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Phone",
-              "displayName": "Phone",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Job Type",
-              "displayName": "Job Type",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Address",
-              "displayName": "Address",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Scheduled Date",
-              "displayName": "Scheduled Date",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Status",
-              "displayName": "Status",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Job ID",
-              "displayName": "Job ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            }
+            { "id": "First Name", "displayName": "First Name", "removed": false },
+            { "id": "Last Name", "displayName": "Last Name", "removed": false },
+            { "id": "Phone", "displayName": "Phone", "removed": false },
+            { "id": "Email", "displayName": "Email", "removed": false },
+            { "id": "Job Type", "displayName": "Job Type", "removed": false },
+            { "id": "Job Source", "displayName": "Job Source", "removed": false },
+            { "id": "Description", "displayName": "Description", "removed": false },
+            { "id": "Address", "displayName": "Address", "removed": false },
+            { "id": "City", "displayName": "City", "removed": false },
+            { "id": "ZIP", "displayName": "ZIP", "removed": false },
+            { "id": "Area", "displayName": "Area", "removed": false },
+            { "id": "Scheduled Date", "displayName": "Scheduled Date", "removed": false },
+            { "id": "Plumber", "displayName": "Plumber", "removed": false },
+            { "id": "Status", "displayName": "Status", "removed": false },
+            { "id": "Job ID", "displayName": "Job ID", "removed": false },
+            { "id": "Reason", "displayName": "Reason", "removed": true }
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
@@ -253,7 +197,7 @@
       "typeVersion": 2.6,
       "position": [
         464,
-        288
+        384
       ],
       "id": "c810efb5-ba60-4aec-afe3-bc70838e2fdd",
       "name": "Send a message1",
@@ -285,102 +229,28 @@
           "mappingMode": "defineBelow",
           "value": {
             "Status": "={{$json.body.newStatus}}",
-            "Job ID": "={{$json.body.jobId}}"
+            "Job ID": "={{$json.body.jobId}}",
+            "Reason": "={{$json.body.reason}}"
           },
-          "matchingColumns": [
-            "Job ID"
-          ],
+          "matchingColumns": ["Job ID"],
           "schema": [
-            {
-              "id": "First Name",
-              "displayName": "First Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Last Name",
-              "displayName": "Last Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Phone",
-              "displayName": "Phone",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Job Type",
-              "displayName": "Job Type",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Address",
-              "displayName": "Address",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Scheduled Date",
-              "displayName": "Scheduled Date",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "Status",
-              "displayName": "Status",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Job ID",
-              "displayName": "Job ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
-            }
+            { "id": "First Name", "displayName": "First Name", "removed": true },
+            { "id": "Last Name", "displayName": "Last Name", "removed": true },
+            { "id": "Phone", "displayName": "Phone", "removed": true },
+            { "id": "Email", "displayName": "Email", "removed": true },
+            { "id": "Job Type", "displayName": "Job Type", "removed": true },
+            { "id": "Job Source", "displayName": "Job Source", "removed": true },
+            { "id": "Description", "displayName": "Description", "removed": true },
+            { "id": "Address", "displayName": "Address", "removed": true },
+            { "id": "City", "displayName": "City", "removed": true },
+            { "id": "ZIP", "displayName": "ZIP", "removed": true },
+            { "id": "Area", "displayName": "Area", "removed": true },
+            { "id": "Scheduled Date", "displayName": "Scheduled Date", "removed": true },
+            { "id": "Plumber", "displayName": "Plumber", "removed": true },
+            { "id": "Status", "displayName": "Status", "removed": false },
+            { "id": "Job ID", "displayName": "Job ID", "removed": false },
+            { "id": "Reason", "displayName": "Reason", "removed": false },
+            { "id": "row_number", "displayName": "row_number", "removed": true }
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
@@ -391,7 +261,7 @@
       "typeVersion": 4.7,
       "position": [
         464,
-        128
+        240
       ],
       "id": "c5dfec0e-9bb7-4754-8cfd-b22a3f530197",
       "name": "Update row in sheet",
@@ -399,6 +269,56 @@
         "googleApi": {
           "id": "YOUR_GOOGLE_CREDENTIAL_ID",
           "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_EMAIL_ADDRESS",
+        "toEmail": "={{$json.body.email}}",
+        "subject": "Your job request has been created",
+        "emailFormat": "text",
+        "text": "=Dear {{$json.body.leadFirstName}},\n\nYour job request ({{$json.body.jobType}}) has been created.\n\nScheduled: {{$json.body.scheduledDate}} {{$json.body.startTime}}–{{$json.body.endTime}}\nStatus: {{$json.body.status}}\n\nYMC Plumbing",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        464,
+        -480
+      ],
+      "id": "e6d1b6b0-5dd2-4bfb-b292-69969ee9f593",
+      "name": "Send an Email",
+      "webhookId": "94e4e37d-1c82-4f18-9155-40ad9a5699ef",
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_EMAIL_ADDRESS",
+        "toEmail": "={{$json.body.email}}",
+        "subject": "Job status updated",
+        "emailFormat": "text",
+        "text": "=Dear {{$json.body.leadFirstName}},\n\nYour job ({{$json.body.jobType}}) status has changed:\nPrevious: {{$json.body.previousStatus}}\nNew: {{$json.body.newStatus}}\n\nYMC Plumbing",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        464,
+        96
+      ],
+      "id": "962c60fc-fbab-4681-97af-ed1036289d33",
+      "name": "Send an Email1",
+      "webhookId": "ed049d19-b0f8-4df6-9330-aa07f8099b4a",
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP account"
         }
       }
     }
@@ -416,36 +336,17 @@
         ]
       ]
     },
-    "Send a message": {
-      "main": [
-        []
-      ]
-    },
     "Switch": {
       "main": [
         [
-          {
-            "node": "Append row in sheet",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Send a message",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Append row in sheet", "type": "main", "index": 0 },
+          { "node": "Send a message", "type": "main", "index": 0 },
+          { "node": "Send an Email", "type": "main", "index": 0 }
         ],
         [
-          {
-            "node": "Send a message1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Update row in sheet",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Send a message1", "type": "main", "index": 0 },
+          { "node": "Update row in sheet", "type": "main", "index": 0 },
+          { "node": "Send an Email1", "type": "main", "index": 0 }
         ]
       ]
     }
@@ -456,7 +357,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "0d04d387-b048-42df-a797-8d8784bce6ea",
+  "versionId": "e07f3fab-c8c3-4de8-8372-4d0faaadd94b",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "YOUR_INSTANCE_ID"

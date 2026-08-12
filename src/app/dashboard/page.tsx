@@ -30,28 +30,28 @@ export default function DashboardPage() {
   }, [fetchJobs]);
 
   const handleStatusChange = async (
-    jobId: number,
-    newStatus: string,
-    reason?: string
+   jobId: number,
+   newStatus: string,
+   reason?: string
   ) => {
-    try {
-      const res = await fetch(`/api/jobs/${jobId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus, reason }),
-      });
-      const json = await res.json();
-      if (json.success) {
-        setJobs((prev) =>
-          prev.map((j) => (j.id === jobId ? { ...j, ...json.job } : j))
-        );
-      } else {
-        alert("Failed to update status: " + (json.error || "Unknown error"));
-      }
-    } catch (error) {
-      console.error("Update failed", error);
-      alert("Network error");
+   try {
+    const res = await fetch(`/api/jobs/${jobId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus, reason }),
+    });
+    const json = await res.json();
+    if (json.success) {
+      setJobs((prev) =>
+        prev.map((j) => (j.id === jobId ? { ...j, ...json.job } : j))
+      );
+    } else {
+      alert("Failed to update status: " + (json.error || "Unknown error"));
     }
+  } catch (error) {
+    console.error("Update failed", error);
+    alert("Network error");
+  }
   };
 
   return (

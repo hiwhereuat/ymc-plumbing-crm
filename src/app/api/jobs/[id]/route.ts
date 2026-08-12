@@ -59,6 +59,7 @@ export async function PATCH(
           leadLastName: existingJob.leadLastName,
           phone: existingJob.phone,
           jobType: existingJob.jobType,
+          email: existingJob.email,
         };
         await fetch(n8nUrl, {
           method: "POST",
