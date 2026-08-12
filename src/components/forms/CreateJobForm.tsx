@@ -1,5 +1,3 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createJobSchema } from "@/lib/validations";
@@ -88,42 +86,88 @@ export function CreateJobForm({ onSuccess, onCancel, initialData, dealId }: Crea
     }
   };
 
+  const fieldStyle = {
+    width: "100%",
+    padding: "0.625rem 0.75rem",
+    borderRadius: "0.5rem",
+    border: "1px solid #e2e8f0",
+    fontSize: "0.875rem",
+    outline: "none",
+    background: "#f8fafc",
+    transition: "border-color 0.2s, box-shadow 0.2s",
+  };
+
+  const labelStyle = {
+    display: "block",
+    fontSize: "0.8125rem",
+    fontWeight: 500,
+    color: "#475569",
+    marginBottom: "0.25rem",
+  };
+
+  const sectionStyle = {
+    background: "#ffffff",
+    borderRadius: "0.75rem",
+    border: "1px solid #f1f5f9",
+    padding: "1.25rem",
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-4">
+    <form onSubmit={handleSubmit(onSubmit)} style={{ padding: "1rem", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h2 style={{ fontSize: "1.125rem", fontWeight: 600, color: "#1e293b" }}>Create Job</h2>
+        {onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            style={{
+              background: "none",
+              border: "none",
+              fontSize: "1.25rem",
+              color: "#94a3b8",
+              cursor: "pointer",
+              padding: "0.25rem",
+            }}
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
       {/* Client Details */}
-      <fieldset className="border p-4 rounded">
-        <legend className="text-lg font-semibold">Client Details</legend>
-        <div className="grid grid-cols-2 gap-4 mt-2">
+      <fieldset style={sectionStyle}>
+        <legend style={{ fontSize: "0.9375rem", fontWeight: 600, color: "#334155", marginBottom: "0.75rem" }}>Client Details</legend>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
           <div>
-            <label className="block text-sm font-medium">First Name *</label>
-            <input {...register("leadFirstName")} className="w-full border rounded p-2" />
-            {errors.leadFirstName && <p className="text-red-500 text-sm">{errors.leadFirstName.message}</p>}
+            <label style={labelStyle}>First Name *</label>
+            <input {...register("leadFirstName")} style={fieldStyle} />
+            {errors.leadFirstName && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.leadFirstName.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Last Name *</label>
-            <input {...register("leadLastName")} className="w-full border rounded p-2" />
-            {errors.leadLastName && <p className="text-red-500 text-sm">{errors.leadLastName.message}</p>}
+            <label style={labelStyle}>Last Name *</label>
+            <input {...register("leadLastName")} style={fieldStyle} />
+            {errors.leadLastName && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.leadLastName.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Phone *</label>
-            <input {...register("phone")} className="w-full border rounded p-2" />
-            {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+            <label style={labelStyle}>Phone *</label>
+            <input {...register("phone")} style={fieldStyle} />
+            {errors.phone && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.phone.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Email</label>
-            <input {...register("email")} className="w-full border rounded p-2" />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+            <label style={labelStyle}>Email *</label>
+            <input {...register("email")} style={fieldStyle} />
+            {errors.email && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.email.message}</p>}
           </div>
         </div>
       </fieldset>
 
       {/* Job Details */}
-      <fieldset className="border p-4 rounded">
-        <legend className="text-lg font-semibold">Job Details</legend>
-        <div className="grid grid-cols-2 gap-4 mt-2">
+      <fieldset style={sectionStyle}>
+        <legend style={{ fontSize: "0.9375rem", fontWeight: 600, color: "#334155", marginBottom: "0.75rem" }}>Job Details</legend>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
           <div>
-            <label className="block text-sm font-medium">Job Type *</label>
-            <select {...register("jobType")} className="w-full border rounded p-2">
+            <label style={labelStyle}>Job Type *</label>
+            <select {...register("jobType")} style={fieldStyle}>
               <option value="">Select...</option>
               <option value="Pipe Leak">Pipe Leak</option>
               <option value="Drain Cleaning">Drain Cleaning</option>
@@ -131,11 +175,11 @@ export function CreateJobForm({ onSuccess, onCancel, initialData, dealId }: Crea
               <option value="Emergency Repair">Emergency Repair</option>
               <option value="Inspection">Inspection</option>
             </select>
-            {errors.jobType && <p className="text-red-500 text-sm">{errors.jobType.message}</p>}
+            {errors.jobType && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.jobType.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Job Source *</label>
-            <select {...register("jobSource")} className="w-full border rounded p-2">
+            <label style={labelStyle}>Job Source *</label>
+            <select {...register("jobSource")} style={fieldStyle}>
               <option value="">Select...</option>
               <option value="Phone Call">Phone Call</option>
               <option value="Website">Website</option>
@@ -143,73 +187,81 @@ export function CreateJobForm({ onSuccess, onCancel, initialData, dealId }: Crea
               <option value="Referral">Referral</option>
               <option value="Walk-in">Walk-in</option>
             </select>
-            {errors.jobSource && <p className="text-red-500 text-sm">{errors.jobSource.message}</p>}
+            {errors.jobSource && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.jobSource.message}</p>}
           </div>
-          <div className="col-span-2">
-            <label className="block text-sm font-medium">Description</label>
-            <textarea {...register("description")} className="w-full border rounded p-2" rows={3} />
+          <div style={{ gridColumn: "span 2" }}>
+            <label style={labelStyle}>Description</label>
+            <textarea {...register("description")} style={{ ...fieldStyle, minHeight: "5rem", resize: "vertical" }} rows={3} />
           </div>
         </div>
       </fieldset>
 
       {/* Service Location */}
-      <fieldset className="border p-4 rounded">
-        <legend className="text-lg font-semibold">Service Location</legend>
-        <div className="grid grid-cols-2 gap-4 mt-2">
-          <div className="col-span-2">
-            <label className="block text-sm font-medium">Address *</label>
-            <input {...register("address")} className="w-full border rounded p-2" />
-            {errors.address && <p className="text-red-500 text-sm">{errors.address.message}</p>}
+      <fieldset style={sectionStyle}>
+        <legend style={{ fontSize: "0.9375rem", fontWeight: 600, color: "#334155", marginBottom: "0.75rem" }}>Service Location</legend>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+          <div style={{ gridColumn: "span 2" }}>
+            <label style={labelStyle}>Address *</label>
+            <input {...register("address")} style={fieldStyle} />
+            {errors.address && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.address.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">City *</label>
-            <input {...register("city")} className="w-full border rounded p-2" />
-            {errors.city && <p className="text-red-500 text-sm">{errors.city.message}</p>}
+            <label style={labelStyle}>City *</label>
+            <input {...register("city")} style={fieldStyle} />
+            {errors.city && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.city.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">ZIP Code *</label>
-            <input {...register("zip")} className="w-full border rounded p-2" />
-            {errors.zip && <p className="text-red-500 text-sm">{errors.zip.message}</p>}
+            <label style={labelStyle}>ZIP Code *</label>
+            <input {...register("zip")} style={fieldStyle} />
+            {errors.zip && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.zip.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Area *</label>
-            <input {...register("area")} className="w-full border rounded p-2" />
-            {errors.area && <p className="text-red-500 text-sm">{errors.area.message}</p>}
+            <label style={labelStyle}>Area *</label>
+            <input {...register("area")} style={fieldStyle} />
+            {errors.area && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.area.message}</p>}
           </div>
         </div>
       </fieldset>
 
       {/* Schedule */}
-      <fieldset className="border p-4 rounded">
-        <legend className="text-lg font-semibold">Schedule</legend>
-        <div className="grid grid-cols-2 gap-4 mt-2">
+      <fieldset style={sectionStyle}>
+        <legend style={{ fontSize: "0.9375rem", fontWeight: 600, color: "#334155", marginBottom: "0.75rem" }}>Schedule</legend>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
           <div>
-            <label className="block text-sm font-medium">Start Date *</label>
-            <input type="date" {...register("scheduledDate")} className="w-full border rounded p-2" />
-            {errors.scheduledDate && <p className="text-red-500 text-sm">{errors.scheduledDate.message}</p>}
+            <label style={labelStyle}>Start Date *</label>
+            <input type="date" {...register("scheduledDate")} style={fieldStyle} />
+            {errors.scheduledDate && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.scheduledDate.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Start Time *</label>
-            <input type="time" {...register("startTime")} className="w-full border rounded p-2" />
-            {errors.startTime && <p className="text-red-500 text-sm">{errors.startTime.message}</p>}
+            <label style={labelStyle}>Start Time *</label>
+            <input type="time" {...register("startTime")} style={fieldStyle} />
+            {errors.startTime && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.startTime.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">End Time *</label>
-            <input type="time" {...register("endTime")} className="w-full border rounded p-2" />
-            {errors.endTime && <p className="text-red-500 text-sm">{errors.endTime.message}</p>}
+            <label style={labelStyle}>End Time *</label>
+            <input type="time" {...register("endTime")} style={fieldStyle} />
+            {errors.endTime && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.endTime.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium">Assigned Plumber *</label>
-            <input {...register("plumber")} className="w-full border rounded p-2" placeholder="Plumber name" />
-            {errors.plumber && <p className="text-red-500 text-sm">{errors.plumber.message}</p>}
+            <label style={labelStyle}>Assigned Plumber *</label>
+            <input {...register("plumber")} style={fieldStyle} placeholder="Plumber name" />
+            {errors.plumber && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{errors.plumber.message}</p>}
           </div>
         </div>
       </fieldset>
 
-      {serverError && <div className="text-red-600 bg-red-100 p-2 rounded">{serverError}</div>}
-      {successMessage && <div className="text-green-600 bg-green-100 p-2 rounded">{successMessage}</div>}
+      {serverError && (
+        <div style={{ background: "#fef2f2", color: "#dc2626", padding: "0.75rem", borderRadius: "0.5rem", fontSize: "0.875rem" }}>
+          {serverError}
+        </div>
+      )}
+      {successMessage && (
+        <div style={{ background: "#f0fdf4", color: "#16a34a", padding: "0.75rem", borderRadius: "0.5rem", fontSize: "0.875rem" }}>
+          {successMessage}
+        </div>
+      )}
 
-      <div className="flex justify-end gap-2">
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.75rem", paddingTop: "0.5rem" }}>
         {onCancel && <Button type="button" variant="secondary" onClick={onCancel}>Cancel</Button>}
         <Button type="submit" isLoading={isSubmitting}>
           Create Job

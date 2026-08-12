@@ -9,22 +9,32 @@ export function Button({
   children,
   variant = "primary",
   isLoading,
+  className = "",
   ...props
 }: ButtonProps) {
-  const base =
-    "rounded px-4 py-2 font-medium transition-colors focus:outline-none focus:ring-2";
+  const base = "rounded-lg px-4 py-2.5 text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed";
   const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
-    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400",
+    primary: "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-sm",
+    secondary: "bg-slate-100 text-slate-600 hover:bg-slate-200",
   };
 
   return (
     <button
-      className={`${base} ${variants[variant]} ${props.disabled || isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+      className={`${base} ${variants[variant]} ${className}`}
       disabled={props.disabled || isLoading}
       {...props}
     >
-      {isLoading ? "Loading..." : children}
+      {isLoading ? (
+        <span className="flex items-center gap-2">
+          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          Loading...
+        </span>
+      ) : (
+        children
+      )}
     </button>
   );
 }

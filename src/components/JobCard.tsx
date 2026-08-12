@@ -1,5 +1,4 @@
 import { Job } from "@/types";
-import { Button } from "@/components/ui/Button";
 
 const STATUS_FLOW: Record<string, string[]> = {
   "Job Created": ["Scheduled", "Lost / Cancelled"],
@@ -9,6 +8,14 @@ const STATUS_FLOW: Record<string, string[]> = {
   "Lost / Cancelled": [],
 };
 
+const STATUS_STYLES: Record<string, { bg: string; text: string }> = {
+  "Job Created": { bg: "#dbeafe", text: "#1d4ed8" },
+  Scheduled: { bg: "#f3e8ff", text: "#7c3aed" },
+  "In Progress": { bg: "#fef3c7", text: "#b45309" },
+  Completed: { bg: "#d1fae5", text: "#047857" },
+  "Lost / Cancelled": { bg: "#fee2e2", text: "#b91c1c" },
+};
+
 interface JobCardProps {
   job: Job;
   onStatusChange: (jobId: number, newStatus: string, reason?: string) => void;
@@ -16,6 +23,7 @@ interface JobCardProps {
 
 export function JobCard({ job, onStatusChange }: JobCardProps) {
   const nextStatuses = STATUS_FLOW[job.status] || [];
+  const statusStyle = STATUS_STYLES[job.status] || { bg: "#f1f5f9", text: "#475569" };
 
   const handleAction = (newStatus: string) => {
     if (newStatus === "Lost / Cancelled") {
@@ -28,31 +36,72 @@ export function JobCard({ job, onStatusChange }: JobCardProps) {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow border">
-      <div className="flex justify-between items-start mb-2">
-        <h4 className="font-semibold">
-          {job.leadFirstName} {job.leadLastName}
-        </h4>
-        <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
+    <div style={{
+      background: "white",
+      borderRadius: "0.75rem",
+      border: "1px solid #f1f5f9",
+      padding: "1rem",
+      boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+      transition: "box-shadow 0.2s",
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
+        <div>
+          <h4 style={{ fontWeight: 600, color: "#1e293b", fontSize: "0.9375rem" }}>
+            {job.leadFirstName} {job.leadLastName}
+          </h4>
+          <p style={{ fontSize: "0.75rem", color: "#94a3b8" }}>Job #{job.id}</p>
+        </div>
+        <span style={{
+          background: statusStyle.bg,
+          color: statusStyle.text,
+          padding: "0.125rem 0.625rem",
+          borderRadius: "9999px",
+          fontSize: "0.75rem",
+          fontWeight: 500,
+        }}>
           {job.status}
         </span>
       </div>
-      <p className="text-sm text-gray-600">{job.jobType} — {job.jobSource}</p>
-      <p className="text-sm">{job.address}, {job.city} {job.zip}</p>
-      <p className="text-sm">📅 {job.scheduledDate} ⏰ {job.startTime}-{job.endTime}</p>
-      <p className="text-sm">👷 {job.plumber}</p>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem", fontSize: "0.875rem", color: "#64748b" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ color: "#94a3b8" }}>🔧</span>
+          <span>{job.jobType} — {job.jobSource}</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ color: "#94a3b8" }}>📍</span>
+          <span>{job.address}, {job.city} {job.zip}</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ color: "#94a3b8" }}>📅</span>
+          <span>{job.scheduledDate} ⏰ {job.startTime}–{job.endTime}</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ color: "#94a3b8" }}>👷</span>
+          <span>{job.plumber}</span>
+        </div>
+      </div>
 
       {nextStatuses.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div style={{ marginTop: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
           {nextStatuses.map((status) => (
-            <Button
+            <button
               key={status}
-              variant="primary"
               onClick={() => handleAction(status)}
-              className="text-xs px-3 py-1"
+              style={{
+                padding: "0.375rem 0.75rem",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                borderRadius: "0.5rem",
+                background: "#f1f5f9",
+                color: "#475569",
+                border: "none",
+                cursor: "pointer",
+                transition: "background 0.2s",
+              }}
             >
-              {status}
-            </Button>
+              {status} →
+            </button>
           ))}
         </div>
       )}

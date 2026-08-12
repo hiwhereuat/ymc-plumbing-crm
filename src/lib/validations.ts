@@ -16,7 +16,7 @@ export const createJobSchema = z.object({
   description: z.string().optional(),
   address: z.string().min(1, "Address is required"),
   city: z.string().min(1, "City is required"),
-  zip: z.string().min(1, "ZIP code is required"),
+  zip: z.string().min(1, "ZIP code is required").regex(/^\d+$/, "ZIP code must contain only digits").min(5, "ZIP code must be at least 5 digits"),
   area: z.string().min(1, "Area is required"),
   scheduledDate: z.string().min(1, "Date is required").refine(
     (val) => {
